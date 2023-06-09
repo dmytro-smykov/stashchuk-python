@@ -1,7 +1,6 @@
 from pathlib import Path
 
-directory = Path('G:/') / 'Программирование' / \
-    'stashchuk-python' / 'files'
+directory = Path('files')
 
 if not directory.exists():
     directory.mkdir()
@@ -32,10 +31,7 @@ with open(file_1) as f:
     print(f.read())
 
 with open(file_2) as f:
-    while True:
-        line = f.readline()
-        if not line:
-            break
+    for line in f:
         print(line.strip())
 
 file_1.unlink()
