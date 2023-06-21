@@ -6,18 +6,26 @@ def password_check(password):
     uppercase = re.compile(r"^.*[A-Z]+.*$")
     lowercase = re.compile(r"^.*[a-z]+.*$")
     numbers = re.compile(r"^.*[0-9]+.*$")
-    cymbols = re.compile(r"^.*[*@#$%^&+=^]+.*$")
+    cymbols = re.compile(r"^.*[*@#$%^&+=!^]+.*$")
+    spaces = re.compile(r"^\S*$")
+    message = []
+    if not spaces.fullmatch(password):
+        message.append('В пробеле не должно быть пробелов')
     if not lenght.fullmatch(password):
-        return (False, 'Password is too short')
+        message.append('В пароле должно быть не менее 8-и символов')
     if not uppercase.fullmatch(password):
-        return (False, 'Password must have uppercase letter')
+        message.append(
+            'В пароле должна быть хотябы одна буква верхнего регистра')
     if not lowercase.fullmatch(password):
-        return (False, 'Password must have lowercase letter')
+        message.append(
+            'В пароле должна быть хотябы одна буква нижнего регистра')
     if not numbers.fullmatch(password):
-        return (False, 'Password must have numbers')
+        message.append('В пароле должна быть хотябы одна цифра')
     if not cymbols.fullmatch(password):
-        return (False, 'Password must have cymbols')
-    return (True, "Password is valid")
+        message.append('В пароле должен быть хотябы один символ')
+    return (message)
 
 
-print(password_check(input('enter password: ')))
+# print(password_check(input('enter password: ')))
+print(password_check('ooOO123!jdhjJh'))
+print(password_check('o1!jj'))
